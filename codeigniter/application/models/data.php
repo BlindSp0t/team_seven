@@ -17,12 +17,25 @@ class Data extends CI_Model
 
 
 	// insert team
-	public function insert_team($id,$name)
+	public function insert_team($id,$name,$loc)
 	{
-		$sql = "INSERT IGNORE INTO `team` (`team_id`,`name`)
-				VALUES(?,?);";
+		$sql = "INSERT IGNORE INTO `team` (`team_id`,`name`,`location`)
+				VALUES(?,?,?);";
 		
-		$data = array($id,$name);
+		$data = array($id,$name,$loc);
+		
+		$query = $this->db->query($sql, $data);
+		
+		return true;
+	}
+
+	// insert player
+	public function insert_player($team_id,$id,$position,$f_name,$l_name)
+	{
+		$sql = "INSERT IGNORE INTO `player` (`team_id`,`player_id`,`first_name`,`last_name`,`position`)
+				VALUES(?,?,?,?,?);";
+		
+		$data = array($team_id,$id,$f_name,$l_name,$position);
 		
 		$query = $this->db->query($sql, $data);
 		

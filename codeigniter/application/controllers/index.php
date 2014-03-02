@@ -42,8 +42,8 @@ class Index extends CI_Controller
 		
 
 		// insert team
-		$this->dMdl->insert_team($away_t_id,$away_t_name);
-		$this->dMdl->insert_team($home_t_id,$home_t_name);
+		//$this->dMdl->insert_team($away_t_id,$away_t_name);
+		//$this->dMdl->insert_team($home_t_id,$home_t_name);
 
 		// insert game
 		$this->dMdl->insert_game($game_id,$away_t_id,$home_t_id,$timestamp,$period1,$period2);
@@ -57,12 +57,47 @@ class Index extends CI_Controller
 			$sec = $event['@attributes']['sec'];
 			$x = $event['@attributes']['x'];
 			$y = $event['@attributes']['y'];
-			$player_id = 0;
+			// there's not always a player involved, so we have to check
+			if(isset($event['@attributes']['player_id'] )) $player_id = $event['@attributes']['player_id'];
+			else $player_id = 0;
 			$team_id = $event['@attributes']['team_id'];
 			$event_type = $event['@attributes']['type_id'];
 			$this->dMdl->insert_event_type($event_type,"nolabel");
 			$this->dMdl->insert_event($id,$timestamp,$min,$sec,$x,$y,$player_id,$team_id,$game_id,$event_type);
 		}
+
+		// redirect to success page
+		$this->finished();
+	}
+
+	public function insertPlayers()
+	{
+		$this->load->model('data','dMdl');
+
+		$arr = json_decode(json_encode((array)simplexml_load_file("./assets/xml/playersopta.xml")),1);
+
+		// Insert teams and players
+		foreach($arr['SoccerDocument']['Team'] as $key=>$team)
+		{
+			// team
+			$team_id = substr($team['@attributes']['uID'], 1); // remove first letter from XML value
+			$team_name = $team['Name'];
+			$team_loc = $team['Country'];
+			$this->dMdl->insert_team($team_id,$team_name,$team_loc);
+
+			// players
+			foreach($team['Player'] as $key=>$value)
+			{
+				$player_id = substr($value['@attributes']['uID'], 1); // remove first letter from XML value
+				$player_pos = $value['@attributes']['Position'];
+				$player_first = $value['PersonName']['First'];
+				$player_last = $value['PersonName']['Last'];
+				$this->dMdl->insert_player($team_id,$player_id,$player_pos,$player_first,$player_last);
+			}
+
+		}
+
+		// redirect to success page
 		$this->finished();
 	}
 
