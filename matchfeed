@@ -1,0 +1,87 @@
+<?php
+include('config.inc.php');
+
+$getmatch=$conn->prepare("SELECT * FROM game 
+						  WHERE game_id = 131897");
+$getmatch->execute();
+
+$matchfeedq =$conn->prepare("SELECT * FROM event 
+							 LEFT JOIN team ON event.team_id=team.team_id 
+							 LEFT JOIN player ON event.player_id=player.player_id 
+							 LEFT JOIN event_type ON event.event_type_id=event_type.event_type_id
+							 ORDER BY event.min, event.sec");
+$matchfeedq->execute();
+?>
+
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+<title>Match Feed For 131897</title>
+</head>
+<body>
+<div id="container">
+<h1>TuS Koblenz 1 - 4 FSV Mainz 05</h1>
+
+<h2>Match Feed</h2>
+<ul id='matchfeed'>
+
+<?php
+while ($row = $matchfeedq->fetch())
+{
+	if($row['team_id'] == 2012) {
+echo "<li class='home'>".$row['min'].":".$row['sec']." - ".$row['name']." | ".$row['first_name']. " ".$row['last_name']." - ".$row['label']."";
+
+switch ($row['label'])
+{
+case "Pass":
+	echo"<span class='pass'></span>";
+	break;
+case "Goal":
+	echo"<span class='goal'></span>";
+	break;
+case "Ball Recovery":
+	echo"<span class='ballrecovery'></span>";
+	break;
+case "Save":
+	echo"<span class='save'></span>";
+	break;
+case "Interception":
+	echo"<span class='interception'></span>";
+	break;
+}
+
+echo "</li>";
+} else if($row['team_id'] == 810)
+{
+echo "<li class='away'>".$row['min'].":".$row['sec']." - ".$row['name']." | ".$row['first_name']. " ".$row['last_name']." - ".$row['label']."";
+switch ($row['label'])
+{
+case "Pass":
+	echo"<span class='pass'></span>";
+	break;
+case "Goal":
+	echo"<span class='goal'></span>";
+	break;
+case "Ball Recovery":
+	echo"<span class='ballrecovery'></span>";
+	break;
+case "Save":
+	echo"<span class='save'></span>";
+	break;
+case "Interception":
+	echo"<span class='interception'></span>";
+	break;
+
+}
+echo "</li>";
+}
+
+}
+?>
+
+</ul>
+</div>
+</body>
+</html>
