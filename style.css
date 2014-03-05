@@ -1,0 +1,196 @@
+body {
+
+margin:0 auto;
+font-family:"Arial";
+background-color:#F2F2F2;
+background-image:url('../images/bg.png');
+
+}
+
+#container {
+	width:1024px;
+	margin:0 auto;
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+	font-family: 'Oswald', sans-serif;
+	color:white;
+}
+
+h2 {
+	font-family: 'Oswald', sans-serif;
+	color:white;
+}
+
+ul#matchfeed {
+	list-style-type:none;
+	display:inline;
+	padding:0;
+}
+
+ul#matchfeed li {
+	border-bottom:2px solid;
+	border-color:rgba(0,0,0,.2);
+	padding:5px;
+}
+
+li.home {
+	background-color:rgba(0, 148, 255, .5);
+}
+
+li.away {
+	background-color:rgba(255,0,0,.5);
+}
+
+li:hover {
+background-color:white;
+cursor:pointer;
+}
+
+.pass {
+	background-image:url('../images/passicon.png');
+	width:25px;
+	height:22px;
+	float:right;
+	margin-right:10px;
+}
+
+.goal {
+	background-image:url('../images/goalicon.png');
+	background-repeat:no-repeat;
+	width:25px;
+	height:25px;
+	float:right;
+	margin-right:10px;
+}
+
+.ballrecovery {
+	background-image:url('../images/recovericon.png');
+	background-repeat:no-repeat;
+	width:25px;
+	height:28px;
+	float:right;
+	margin-right:10px;
+}
+
+.save {
+	background-image:url('../images/saveicon.png');
+	background-repeat:no-repeat;
+	width:36px;
+	height:25px;
+	float:right;
+	margin-right:5px;
+
+}
+
+.interception {
+	background-image:url('../images/interceptionicon.png');
+	background-repeat:no-repeat;
+	width:25px;
+	height:22px;
+	float:right;
+	margin-right:10px;
+}
+
+
+#pitch {
+
+width:949px;
+height:712px;
+background-image:url('../images/pitch.jpg');
+
+}
+
+#team1 {
+
+height:100%;
+width:37%;
+background-color:rgba(176,23,31,.65);
+margin:0;
+padding:0;
+float:left;
+}
+
+.teamcontent {
+	margin-top:170px;
+}
+
+#team1 h1, #team1 p  {
+	color:white;
+	font-family: 'Oswald', sans-serif;
+	text-align:center;
+	text-shadow:2px 2px black;
+}
+
+#team1 p, #team2 p {
+font-size:2em;
+
+}
+
+
+#team2 {
+height:100%;
+width:63%;
+background-color:rgba(30,144,255,.65);
+margin:0;
+padding:0;
+float:left;
+}
+
+#team2 h1, #team2 p {
+	color:white;
+	text-align:center;
+	font-family: 'Oswald', sans-serif;
+	text-shadow:2px 2px black;
+
+}
+
+.logo {
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:181px;
+height:181px;
+}
+
+#pitchcanvas {
+	background-image:url('../images/pitch.jpg');
+	float:left;
+}
+
+#team1list {
+	float:left;
+	margin-left:50px;
+
+}
+
+#team1list li {
+	list-style-type:none;
+
+}
+
+
+#team1list li:hover {
+	color:red;
+	cursor:pointer;
+}
+
+#team2list {
+	margin-left:100px;
+float:left;
+
+}
+
+
+#team2list li {
+	list-style-type:none;
+
+}
+
+
+#team2list li:hover {
+	color:blue;
+	cursor:pointer;
+}
+
